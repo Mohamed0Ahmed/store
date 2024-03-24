@@ -1,0 +1,40 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@import "ngx-toastr/toastr";
+
+//*##############
+.links {
+  @apply md:static absolute bg-slate-900 md:min-h-fit min-h-[40vh] left-0 top-[70px] md:w-6/12 w-full md:flex items-center justify-center transition;
+}
+
+//*
+.box {
+  @apply hover:border-red-500;
+}
+
+.user-icon {
+  @apply text-[12px] bg-gray-700 text-center opacity-0 transition text-white p-1 rounded-full absolute top-[-30px] left-[-40px] w-[100px];
+}
+
+.input-search {
+  @apply pr-3 pl-10 py-2 font-semibold placeholder-gray-500 text-black rounded-2xl border-none ring-2 focus:ring-gray-500 ring-gray-300;
+}
+
+.price {
+  @apply absolute top-[15px] right-[20px] border-2 border-red-500 px-2 text-red-500 font-bold;
+}
+
+.hot {
+  @apply bg-red-600 w-[100px] mx-1 h-[80px] md:h-[100px] rounded-[50%] text-white flex flex-col text-center justify-center;
+}
+.btn {
+  @apply px-5 py-2 rounded-full transition;
+}
+.input {
+  @apply w-full border border-gray-300 px-3 py-2 
+  rounded-lg shadow-sm focus:outline-none focus:border-indigo-300 focus:ring-1 focus:ring-indigo-300 my-1;
+}

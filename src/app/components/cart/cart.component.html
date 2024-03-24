@@ -1,0 +1,193 @@
+<section class="pt-[10px] lg:container mx-auto">
+  <div
+    class="flex flex-col lg:flex-row items-center justify-center pt-12 h-[70vh]"
+    *ngIf="numberOfItems == 0"
+  >
+    <div class="lg:w-[60%]">
+      <img
+        src="./assets/images/24758680_tourist_va_03-removebg.png"
+        alt="svg"
+        class="w-full"
+      />
+    </div>
+    <div class="pt-12 text-center">
+      <h2 class="font-extrabold text-[30px] text-slate-700 dark:text-white">
+        Your Cart is empty.
+      </h2>
+      <button
+        class="btn bg-red-700 hover:bg-red-500 font-bold text-white"
+        routerLink="/home"
+      >
+        Go To Shopping
+      </button>
+    </div>
+  </div>
+
+  <!-- *################ -->
+
+  <!-- * small screen -->
+  <div *ngIf="numberOfItems != 0" class="md:hidden">
+    <div
+      class="bg-white p-4 rounded-lg shadow dark:bg-[#1e1e1e]"
+      *ngFor="let item of cartDetails.products"
+    >
+      <div class="flex items-center justify-between">
+        <div>
+          <i
+            class="fa-solid fa-trash fa-lg m-2 cursor-pointer"
+            style="color: #d74747"
+            (click)="removeCartItem(item.product._id)"
+          ></i>
+        </div>
+        <div class="text-center">
+          <h2 class="text-black font-bold dark:text-white">
+            {{ item.product.title.split(" ").slice(0, 2).join(" ") }}
+          </h2>
+          <img
+            [src]="item.product.imageCover"
+            [alt]="item.product.title"
+            class="w-[100px] h-[100px]"
+          />
+        </div>
+        <div class="text-center text-red-500 dark:text-white">
+          <h2 class="font-bold">
+            {{ item.price | currency : " EGP " }}
+          </h2>
+          <h2 class="font-bold">20% SALE</h2>
+        </div>
+        <div>
+          <span>
+            <ng-container
+              *ngFor="let _ of generateRatingArray(item.product.ratingsAverage)"
+            >
+              <i
+                class="fa-solid fa-star repeat_here"
+                style="color: #ff3b3b"
+              ></i>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- *table -->
+  <div *ngIf="numberOfItems != 0">
+    <div class="overflow-auto rounded-lg shadow hidden md:block">
+      <table class="w-full">
+        <thead
+          class="bg-gray-300 border-b-2 border-red-600 dark:text-white dark:bg-slate-700"
+        >
+          <tr class="">
+            <th class="p-3 text-[20px] font-bold tracking-wide">DELETE</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">IMAGE</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">PRODUCT</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">PRICE</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">QUANTITY</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">TOTAL</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">SALE</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">RATING</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-100 dark:bg-[#111111] h-[70vh]">
+          <tr class="text-center" *ngFor="let item of cartDetails.products">
+            <td class="p-3 text-[16px] text-gray-700">
+              <i
+                class="fa-solid fa-trash fa-lg text-red-500 cursor-pointer"
+                (click)="removeCartItem(item.product._id)"
+              ></i>
+            </td>
+            <td class="p-3">
+              <img
+                class="w-[100px] h-[100px] relative lg:left-[40px]"
+                [src]="item.product.imageCover"
+                [alt]="item.product.title"
+              />
+            </td>
+            <td class="p-3 text-[20px] font-bold text-gray-700 dark:text-white">
+              {{ item.product.title.split(" ").slice(0, 2).join(" ") }}
+            </td>
+            <td class="p-3 text-[16px] text-red-500 font-bold dark:text-white">
+              {{ item.price | currency : " EGP " }}
+            </td>
+            <td class="p-3 text-[16px] text-red-500 font-bold dark:text-white">
+              <div class="font-extrabold text-[20px]">
+                <button
+                  class="w-[30px] h-[30px] bg-red-600 hover:bg-red-500 rounded-full text-white"
+                  (click)="updateCount(item.product._id, item.count - 1)"
+                  [disabled]="item.count == 1"
+                >
+                  -
+                </button>
+                <span class="px-2"> {{ item.count }} </span>
+                <button
+                  class="w-[30px] h-[30px] bg-red-600 hover:bg-red-500 rounded-full text-white"
+                  (click)="updateCount(item.product._id, item.count + 1)"
+                >
+                  +
+                </button>
+              </div>
+            </td>
+            <td class="p-3 text-[16px] text-red-500 font-bold dark:text-white">
+              {{ item.price * item.count | currency : " EGP " }}
+            </td>
+            <td
+              class="p-3 text-red-500 text-[20px] font-extrabold dark:text-white"
+            >
+              <span *ngIf="item.price > 3000"> -20% </span>
+              <span *ngIf="item.price < 3000 && item.price > 1500"> -16% </span>
+              <span *ngIf="item.price < 1500"> -12% </span>
+            </td>
+            <td class="p-3 text-[16px] text-gray-700">
+              <div class="flex items-center justify-center py-3">
+                <span>
+                  <ng-container
+                    *ngFor="
+                      let _ of generateRatingArray(item.product.ratingsAverage)
+                    "
+                  >
+                    <i
+                      class="fa-solid fa-star repeat_here"
+                      style="color: #ff3b3b"
+                    ></i>
+                  </ng-container>
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="flex flex-col md:flex-row justify-between p-5 bg-gray-100 dark:bg-[#111111] rounded-lg relative top-[-20px]"
+    >
+      <div class="flex flex-col md:flex-row">
+        <button class="btn bg-red-600 hover:bg-red-400 text-white font-bold">
+          <span>
+            PAYMENT
+            <i
+              class="fa-brands fa-cc-visa text-[20px]"
+              style="color: #ffffff"
+            ></i>
+          </span>
+        </button>
+        <button
+          class="btn bg-red-600 hover:bg-red-400 text-white font-bold md:mx-2 my-2 md:my-0"
+        >
+          <span>
+            CASH
+            <i class="fa-solid fa-truck" style="color: #ffffff"></i>
+          </span>
+        </button>
+      </div>
+      <div class="flex pt-5 md:pt-0">
+        <button
+          class="btn bg-red-600 hover:bg-red-400 font-bold text-white w-full"
+          (click)="clearCart()"
+        >
+          CLEAR CART
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

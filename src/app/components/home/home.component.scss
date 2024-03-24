@@ -1,0 +1,17 @@
+.search {
+  object-fit: cover;
+  object-position: end;
+  height: 250px;
+  vertical-align: middle;
+  overflow: clip;
+  width: 100%;
+}
+
+.wish:hover .user-icon {
+  opacity: 1;
+}
+.view:hover .user-icon {
+  opacity: 1;
+}
+
+

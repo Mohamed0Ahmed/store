@@ -1,0 +1,339 @@
+<section class="pt-[10px] container mx-auto">
+  <!-- * search  -->
+  <div class="flex justify-center relative">
+    <img
+      src="./assets/images/pexels-karolina-grabowska-5632371.jpg"
+      alt="search"
+      class="search"
+    />
+    <div
+      class="absolute inset-0 flex items-center justify-center dark:bg-black dark:bg-opacity-50"
+    ></div>
+    <div
+      class="flex absolute lg:left-[300px] lg:top-[100px] mt-5 md:left-[100px] md:top-[100px] w-96 rounded bg-white border"
+    >
+      <i
+        class="fa-solid fa-magnifying-glass fa-xl ic relative top-[18px] left-[10px]"
+        style="color: #555555"
+        aria-hidden="true"
+      ></i>
+      <input
+        type="search"
+        class="w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none font-bold"
+        placeholder="Search....."
+        [(ngModel)]="serchTerm"
+      />
+      <button class="m-2 rounded bg-red-600 px-4 text-white dark:bg-slate-700">
+        Search
+      </button>
+    </div>
+  </div>
+
+  <!-- //* elcrtonic -->
+  <div class="py-4 dark:text-white">
+    <span>
+      <h2 class="font-extrabold text-[30px] py-5">Electronic Products</h2>
+    </span>
+    <owl-carousel-o [options]="electro">
+      <ng-container *ngFor="let item of productData | search : serchTerm">
+        <ng-template
+          carouselSlide
+          [id]="item.id"
+          *ngIf="item.category.name == 'Electronics'"
+        >
+          <div
+            class="p-3 relative border-2 box mx-2 transition max-w-[350px] ms-5 md:ms-0 dark:bg-[#151515] dark:border-none"
+          >
+            <div class="p-0">
+              <img
+                [src]="item.imageCover"
+                [alt]="item.title"
+                class="w-[50px] h-[250px]"
+              />
+            </div>
+            <div class="text-center">
+              <p>{{ item.brand.name }}</p>
+              <p class="font-bold">
+                {{ item.title.split(" ").slice(0, 2).join(" ") }}
+              </p>
+              <p class="font-bold text-red-600">
+                {{ item.price | currency : " EGP " }}
+              </p>
+              <p
+                class="text-gray-600 line-through dark:text-white"
+                *ngIf="item.price > 3000"
+              >
+                {{ (item.price * 20) / 100 + item.price }}
+              </p>
+              <p
+                class="text-gray-600 line-through dark:text-white"
+                *ngIf="item.price < 3000 && item.price > 1500"
+              >
+                {{ (item.price * 16) / 100 + item.price }}
+              </p>
+              <p
+                class="text-gray-600 line-through dark:text-white"
+                *ngIf="item.price < 1500"
+              >
+                {{ (item.price * 12) / 100 + item.price }}
+              </p>
+            </div>
+            <div class="flex items-center justify-center py-3">
+              <span>
+                <ng-container
+                  *ngFor="let _ of generateRatingArray(item.ratingsAverage)"
+                >
+                  <i
+                    class="fa-solid fa-star repeat_here"
+                    style="color: #ff3b3b"
+                  ></i>
+                </ng-container>
+              </span>
+            </div>
+            <span class="price" *ngIf="item.price > 3000"> -20% </span>
+            <span class="price" *ngIf="item.price < 3000 && item.price > 1500">
+              -16%
+            </span>
+            <span class="price" *ngIf="item.price < 1500"> -12% </span>
+            <hr />
+            <div class="info flex justify-center">
+              <div class="w-[50%] flex justify-between pt-4">
+                <div class="cursor-pointer relative wish">
+                  <i
+                    class="fa-solid fa-heart text-[22px] dark:text-white"
+                    [class.text-red]="wishlistData.includes(item._id)"
+                    [class.text-black]="wishlistData.includes(item._id)!"
+                    (click)="addOrRemove(item._id)"
+                  ></i>
+                  <div
+                    class="user-icon dark:bg-white dark:text-black"
+                    (click)="addOrRemove(item._id)"
+                  >
+                    Add To Wishlist
+                  </div>
+                </div>
+                <div
+                  class="cursor-pointer relative view"
+                  (click)="addCart(item._id)"
+                >
+                  <i
+                    class="fa-solid fa-cart-plus text-[22px] text-black dark:text-white"
+                  ></i>
+                  <div class="user-icon dark:bg-white dark:text-black">
+                    <a (click)="addCart(item._id)">Add To Cart</a>
+                  </div>
+                </div>
+                <div
+                  class="cursor-pointer relative view"
+                  [routerLink]="['/details', item._id]"
+                  *ngIf="isUser"
+                >
+                  <i
+                    class="fa-solid fa-eye text-[22px] text-black dark:text-white"
+                  ></i>
+                  <div class="user-icon dark:bg-white dark:text-black">
+                    <a [routerLink]="['/details', item._id]">Quick View</a>
+                  </div>
+                </div>
+                <div
+                  class="cursor-pointer relative view"
+                  [routerLink]="['details', item._id]"
+                  *ngIf="isUser == false"
+                >
+                  <i
+                    class="fa-solid fa-eye text-[22px] text-black dark:text-white"
+                  ></i>
+                  <div class="user-icon dark:bg-white dark:text-black">
+                    <a [routerLink]="['details', item._id]">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</section>
+
+<!-- *############## -->
+<div
+  class="w-full h-[500px] bg-[#E5E6EF] flex justify-center dark:bg-[#1a1919]"
+>
+  <div
+    class="w-[80%] flex lg:justify-between justify-center flex-col md:flex-row"
+  >
+    <img
+      src="./assets/images/1678297987209-4-removebg-preview.png"
+      alt="lab"
+      class="w-[400px] hidden lg:block"
+    />
+    <div>
+      <div class="pt-[100px] flex">
+        <div class="hot">
+          <span class="font-extrabold text-[20px]">04</span>
+          <span>Days</span>
+        </div>
+        <div class="hot">
+          <span class="font-extrabold text-[20px]">10</span>
+          <span>Hours</span>
+        </div>
+        <div class="hot">
+          <span class="font-extrabold text-[20px]">50</span>
+          <span>Minutes</span>
+        </div>
+        <div class="hot">
+          <span class="font-extrabold text-[20px]">15</span>
+          <span>Seconds</span>
+        </div>
+      </div>
+      <div class="text-center py-5">
+        <h2 class="text-black font-extrabold text-[35px] dark:text-slate-200">
+          HOT DEAL THIS WEEK
+        </h2>
+        <h2 class="text-gray-700 font-medium text-[25px] dark:text-slate-400">
+          NEW COLLECTION UP TO 50% OFF
+        </h2>
+      </div>
+      <div class="text-center py-5">
+        <button
+          class="bg-red-600 px-5 py-2 rounded-full transition hover:bg-red-500 mx-3 text-white font-bold"
+          (click)="goUp()"
+        >
+          SHOP NOW
+        </button>
+      </div>
+    </div>
+    <img
+      src="./assets/images/1678300420239-1-removebg-preview.png"
+      alt="air"
+      class="w-[400px] hidden lg:block"
+    />
+  </div>
+</div>
+
+<!-- *############ top  -->
+<div class="py-4 dark:text-white container mx-auto">
+  <span>
+    <h2 class="font-extrabold text-[30px] py-5">TOP SELLING</h2>
+  </span>
+  <owl-carousel-o [options]="electro">
+    <ng-container *ngFor="let item of productData2 | search : serchTerm">
+      <ng-template
+        carouselSlide
+        [id]="item.id"
+        *ngIf="item.category.name == 'Electronics'"
+      >
+        <div
+          class="p-3 relative border-2 box mx-2 transition max-w-[350px] ms-5 md:ms-0 dark:bg-[#151515] dark:border-none"
+        >
+          <div class="p-0">
+            <img
+              [src]="item.imageCover"
+              [alt]="item.title"
+              class="w-[50px] h-[250px]"
+            />
+          </div>
+          <div class="text-center">
+            <p>{{ item.brand.name }}</p>
+            <p class="font-bold">
+              {{ item.title.split(" ").slice(0, 2).join(" ") }}
+            </p>
+            <p class="font-bold text-red-600">
+              {{ item.price | currency : " EGP " }}
+            </p>
+            <p
+              class="text-gray-600 line-through dark:text-white"
+              *ngIf="item.price > 3000"
+            >
+              {{ (item.price * 20) / 100 + item.price }}
+            </p>
+            <p
+              class="text-gray-600 line-through dark:text-white"
+              *ngIf="item.price < 3000 && item.price > 1500"
+            >
+              {{ (item.price * 16) / 100 + item.price }}
+            </p>
+            <p
+              class="text-gray-600 line-through dark:text-white"
+              *ngIf="item.price < 1500"
+            >
+              {{ (item.price * 12) / 100 + item.price }}
+            </p>
+          </div>
+          <div class="flex items-center justify-center py-3">
+            <span>
+              <ng-container
+                *ngFor="let _ of generateRatingArray(item.ratingsAverage)"
+              >
+                <i
+                  class="fa-solid fa-star repeat_here"
+                  style="color: #ff3b3b"
+                ></i>
+              </ng-container>
+            </span>
+          </div>
+          <span class="price" *ngIf="item.price > 3000"> -20% </span>
+          <span class="price" *ngIf="item.price < 3000 && item.price > 1500">
+            -16%
+          </span>
+          <span class="price" *ngIf="item.price < 1500"> -12% </span>
+          <hr />
+          <div class="info flex justify-center">
+            <div class="w-[50%] flex justify-between pt-4">
+              <div class="cursor-pointer relative wish">
+                <i
+                  class="fa-solid fa-heart text-[22px] dark:text-white"
+                  [class.text-red]="wishlistData.includes(item._id)"
+                  [class.text-black]="wishlistData.includes(item._id)!"
+                  (click)="addOrRemove(item._id)"
+                ></i>
+                <div
+                  class="user-icon dark:bg-white dark:text-black"
+                  (click)="addOrRemove(item._id)"
+                >
+                  Add To Wishlist
+                </div>
+              </div>
+              <div
+                class="cursor-pointer relative view"
+                (click)="addCart(item._id)"
+              >
+                <i
+                  class="fa-solid fa-cart-plus text-[22px] text-black dark:text-white"
+                ></i>
+                <div class="user-icon dark:bg-white dark:text-black">
+                  <a (click)="addCart(item._id)">Add To Cart</a>
+                </div>
+              </div>
+              <div
+                class="cursor-pointer relative view"
+                [routerLink]="['/details', item._id]"
+                *ngIf="isUser"
+              >
+                <i
+                  class="fa-solid fa-eye text-[22px] text-black dark:text-white"
+                ></i>
+                <div class="user-icon dark:bg-white dark:text-black">
+                  <a [routerLink]="['/details', item._id]">Quick View</a>
+                </div>
+              </div>
+              <div
+                class="cursor-pointer relative view"
+                [routerLink]="['details', item._id]"
+                *ngIf="isUser == false"
+              >
+                <i
+                  class="fa-solid fa-eye text-[22px] text-black dark:text-white"
+                ></i>
+                <div class="user-icon dark:bg-white dark:text-black">
+                  <a [routerLink]="['details', item._id]">Quick View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+</div>

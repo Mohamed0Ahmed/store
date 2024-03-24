@@ -1,0 +1,225 @@
+<!--*  -->
+<!--*  -->
+<!--*  -->
+<!--*  -->
+
+<section class="container mx-auto dark:text-gray-300 ">
+  <div
+    class="flex md:flex-col lg:flex-row lg:pt-12 items-center justify-center  "
+  >
+    <div
+      class="w-full lg:w-[30%] bg-[#f7f7f7] shadow-sm dark:shadow-gray-400 rounded-xl  dark:bg-neutral-900 p-6"
+    >
+      <div class="pt-12 text-center">
+        <h2
+          class="font-extrabold text-[30px] text-slate-700 dark:text-gray-300"
+        >
+          Welcome To Store.
+        </h2>
+        <p
+          class="pt-4 font-semibold text-[20px] text-slate-600 dark:text-gray-300"
+        >
+          Have an Account ?
+        </p>
+        <p
+          class="pt-2 font-semibold text-[20px] text-slate-600 dark:text-gray-300"
+        >
+          <span
+            class="text-red-600 font-extrabold cursor-pointer hover:text-red-500 transition"
+            routerLink="/guest/login"
+            >Login</span
+          >
+          Now
+        </p>
+      </div>
+      <!-- *#### form -->
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="handleForm()"
+        class="bg-white py-8 px-6 shadow rounded-lg dark:bg-neutral-900 mt-4 "
+      >
+        <h3 class="font-bold text-[20px] text-gray-700 dark:text-white">
+          Register Form
+        </h3>
+
+        <div>
+          <label
+            for="name"
+            class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+            >Name :</label
+          >
+          <input
+            formControlName="name"
+            type="text"
+            id="name"
+            class="input font-bold dark:bg-[#1e1e1e]"
+          />
+        </div>
+
+        <div
+          class="text-center text-red-600 dark:text-white"
+          *ngIf="
+            registerForm.get('name')?.value != '' &&
+            registerForm.get('name')?.errors
+          "
+        >
+          <p class="" *ngIf="registerForm.get('name')?.getError('required')">
+            Name is Required
+          </p>
+          <p class="" *ngIf="registerForm.get('name')?.getError('minlength')">
+            Min length is 3
+          </p>
+          <p class="" *ngIf="registerForm.get('name')?.getError('maxlength')">
+            Max length is 20
+          </p>
+        </div>
+
+        <div class="">
+          <label
+            for="mail"
+            class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+            >Email :</label
+          >
+          <input
+            formControlName="email"
+            type="email"
+            id="mail"
+            class="input font-bold dark:bg-[#1e1e1e]"
+          />
+        </div>
+
+        <div
+          class="text-center text-red-600 dark:text-white"
+          *ngIf="
+            registerForm.get('email')?.value != '' &&
+            registerForm.get('email')?.errors
+          "
+        >
+          <p class="" *ngIf="registerForm.get('email')?.getError('email')">
+            Examble : xxx@gmail.com
+          </p>
+          <p class="" *ngIf="registerForm.get('email')?.getError('required')">
+            Email is required
+          </p>
+        </div>
+
+        <div>
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+            >Password :</label
+          >
+          <input
+            formControlName="password"
+            type="password"
+            id="password"
+            class="input font-bold dark:bg-[#1e1e1e]"
+          />
+        </div>
+
+        <div
+          class="text-center text-red-600 dark:text-white"
+          *ngIf="
+            registerForm.get('password')?.value != '' &&
+            registerForm.get('password')?.errors
+          "
+        >
+          <p class="" *ngIf="registerForm.get('password')?.getError('pattern')">
+            Password must be atleast 6 chars
+          </p>
+          <p
+            class=""
+            *ngIf="registerForm.get('password')?.getError('required')"
+          >
+            Password is required
+          </p>
+        </div>
+
+        <div>
+          <label
+            for="rePassword"
+            class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+            >Re Password :</label
+          >
+          <input
+            formControlName="rePassword"
+            type="password"
+            id="rePassword"
+            class="input font-bold dark:bg-[#1e1e1e]"
+          />
+        </div>
+
+        <div
+          class="text-center text-red-600 dark:text-white"
+          *ngIf="
+            registerForm.get('rePassword')?.value != '' &&
+            registerForm.get('rePassword')?.errors
+          "
+        >
+          <p
+            class=""
+            *ngIf="registerForm.get('rePassword')?.getError('missMatch')"
+          >
+            RePassword must be match Password
+          </p>
+          <p
+            class=""
+            *ngIf="registerForm.get('rePassword')?.getError('required')"
+          >
+            RePassword is required
+          </p>
+        </div>
+
+        <div>
+          <label
+            for="phone"
+            class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+            >Phone Number :</label
+          >
+          <input
+            formControlName="phone"
+            type="tel"
+            id="phone"
+            class="input font-bold dark:bg-[#1e1e1e]"
+          />
+        </div>
+
+        <div
+          class="text-center text-red-600 dark:text-white"
+          *ngIf="
+            registerForm.get('phone')?.value != '' &&
+            registerForm.get('phone')?.errors
+          "
+        >
+          <p class="" *ngIf="registerForm.get('phone')?.getError('pattern')">
+            Invaild Number
+          </p>
+          <p class="" *ngIf="registerForm.get('phone')?.getError('required')">
+            Number is Required
+          </p>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button
+            class="btn bg-red-600 hover:bg-red-500 transition text-white mt-2 w-full"
+            type="submit"
+            [disabled]="registerForm.invalid"
+          >
+            Register
+            <i *ngIf="isValid" class="fa-solid fa-spinner fa-spin"></i>
+          </button>
+        </div>
+        <p *ngIf="errorMessage" class="">
+          {{ errorMessage }}
+        </p>
+      </form>
+    </div>
+    <div class="lg:w-[50%] hidden lg:block">
+      <img
+        src="./assets/images/24780383_eajz_wird_220224-removebg-preview.png"
+        alt="svg"
+        class="w-full b"
+      />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+<div
+  class="py-5 bg-slate-900 fixed top-0 left-0 right-0 z-40 border-b-4 border-b-red-600 dark:bg-black"
+>
+  <nav
+    class="lg:container px-3 md:px-0 mx-auto text-white flex items-center justify-between"
+  >
+    <!-- *logo -->
+    <div>
+      <h1
+        class="tracking-widest text-3xl cursor-pointer font-bold"
+        routerLink="home"
+      >
+        STORE<span class="text-red-500">.</span>
+      </h1>
+    </div>
+
+    <!-- * links -->
+    <div class="links dark:bg-black" [class.hidden]="menuOpen">
+      <ul class="flex md:flex-row flex-col items-center md:gap-[1vw] gap-6">
+        <li
+          (click)="toggleNav()"
+          class="tracking-wide font-medium text-1xl hover:text-gray-500 transition"
+        >
+          <a routerLink="home">Home</a>
+        </li>
+        <li
+          (click)="toggleNav()"
+          class="tracking-wide font-medium text-1xl hover:text-gray-500 transition"
+        >
+          <a routerLink="category">Category</a>
+        </li>
+
+        <li
+          (click)="toggleNav()"
+          class="tracking-wide transition md:ms-6 cursor-pointer hover:text-gray-500"
+        >
+          <span routerLink="wishlist" class="flex flex-col items-center">
+            <span
+              ><i
+                class="fa-regular fa-heart text-[20px] relative"
+                style="color: #ffffff"
+              >
+              </i
+            ></span>
+            <span class="font-bold text-[8px]">Your Wishlist</span>
+          </span>
+        </li>
+        <li
+          (click)="toggleNav()"
+          class="tracking-wide transition cursor-pointer hover:text-gray-500"
+        >
+          <span routerLink="cart" class="flex flex-col items-center">
+            <span
+              ><i
+                class="fa-solid fa-cart-shopping text-[20px] relative"
+                style="color: #ffffff"
+              >
+              </i>
+            </span>
+            <span class="font-bold text-[8px]">Your Cart</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- * sign in -->
+    <div class="text-center flex">
+      <button
+        class="bg-red-800 px-5 py-2 rounded-full transition hover:bg-red-400 mx-3"
+        routerLink="login"
+      >
+        Sign In
+      </button>
+      <!-- * menu -->
+      <div class="md:hidden">
+        <button (click)="toggleNav()">
+          <i class="fa-solid fa-bars text-3xl" style="color: #ffffff"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+</div>

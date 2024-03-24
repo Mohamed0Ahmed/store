@@ -1,0 +1,124 @@
+<section class="pt-[10px] container mx-auto">
+  <div
+    class="flex flex-col lg:flex-row items-center justify-center pt-12 h-[70vh]"
+    *ngIf="productData.length == 0"
+  >
+    <div class="lg:w-[60%]">
+      <img
+        src="./assets/images/22676355_80_cmVtb3RlX3dvcmtpbmctMDg-removebg-preview.png"
+        alt="svg"
+        class="w-full"
+      />
+    </div>
+    <div class="pt-12 text-center">
+      <h2 class="font-extrabold text-[30px] text-slate-700 dark:text-white">
+        Your Wishlist is empty.
+      </h2>
+      <button
+        class="btn bg-red-700 hover:bg-red-500 font-bold text-white"
+        routerLink="/home"
+      >
+        Go To Shopping
+      </button>
+    </div>
+  </div>
+
+  <!-- *table -->
+  <div *ngIf="productData.length != 0">
+    <div class="overflow-auto rounded-lg shadow hidden md:block">
+      <table class="w-full">
+        <thead
+          class="bg-gray-300 border-b-2 border-red-600 dark:text-white dark:bg-slate-700"
+        >
+          <tr class="">
+            <th class="p-3 text-[20px] font-bold tracking-wide">DELETE</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">IMAGE</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">PRODUCT</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">PRICE</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">SALE</th>
+            <th class="p-3 text-[20px] font-bold tracking-wide">ADD TO CART</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-100 dark:bg-[#111111] h-[80vh]">
+          <tr class="text-center" *ngFor="let item of productData">
+            <td class="p-3 text-[16px] text-gray-700">
+              <i
+                class="fa-solid fa-trash fa-lg text-red-500 cursor-pointer"
+                (click)="remove(item.id)"
+              ></i>
+            </td>
+            <td class="p-3">
+              <img
+                class="w-[100px] h-[100px] relative left-[20px] 2xl:left-[35px]"
+                [src]="item.imageCover"
+                [alt]="item.title"
+              />
+            </td>
+            <td class="p-3 text-[20px] font-bold text-gray-700 dark:text-white">
+              {{ item.title.split(" ").slice(0, 3).join(" ") }}
+            </td>
+            <td class="p-3 text-[16px] text-red-500 font-bold dark:text-white">
+              {{ item.price | currency : " EGP " }}
+            </td>
+            <td
+              class="p-3 text-red-500 text-[20px] font-extrabold dark:text-white"
+            >
+              <span *ngIf="item.price > 3000"> -20% </span>
+              <span *ngIf="item.price < 3000 && item.price > 1500"> -16% </span>
+              <span *ngIf="item.price < 1500"> -12% </span>
+            </td>
+            <td class="p-3 text-[16px] text-gray-700">
+              <button
+                class="btn bg-red-600 hover:bg-red-500 text-white"
+                (click)="addCart(item.id)"
+              >
+                Add +
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- * small screen -->
+  <div *ngIf="productData.length != 0" class="md:hidden">
+    <div
+      class="bg-white p-4 rounded-lg shadow dark:bg-[#1e1e1e]"
+      *ngFor="let item of productData"
+    >
+      <div class="flex items-center justify-between">
+        <div>
+          <i
+            class="fa-solid fa-trash fa-lg m-2 cursor-pointer"
+            style="color: #d74747"
+            (click)="remove(item.id)"
+          ></i>
+        </div>
+        <div class="text-center">
+          <h2 class="text-black font-bold dark:text-white">
+            {{ item.title.split(" ").slice(0, 2).join(" ") }}
+          </h2>
+          <img
+            [src]="item.imageCover"
+            [alt]="item.title"
+            class="w-[100px] h-[100px]"
+          />
+        </div>
+        <div class="text-center text-red-500 dark:text-white">
+          <h2 class="font-bold">
+            {{ item.price | currency : " EGP " }}
+          </h2>
+          <h2 class="font-bold">20% SALE</h2>
+        </div>
+        <div>
+          <button
+            class="btn bg-red-600 hover:bg-red-500 text-white"
+            (click)="addCart(item.id)"
+          >
+            ADD
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

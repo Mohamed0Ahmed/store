@@ -1,0 +1,119 @@
+<section class="container mx-auto dark:text-gray-300">
+  <div class="flex md:flex-col lg:flex-row lg:pt-12 items-center">
+    <div class="lg:w-[60%] hidden md:block">
+      <img
+        src="./assets/images/21852411_sysadmin_03-removebg-preview.png"
+        alt="svg"
+        class="w-full b"
+      />
+    </div>
+    <div
+      class="w-full lg:w-[30%] bg-[#f7f7f7] shadow-sm dark:shadow-gray-400 rounded-xl h-[90vh] md:h-[100%] dark:bg-neutral-900"
+    >
+      <div class="pt-12 text-center">
+        <h2
+          class="font-extrabold text-[30px] text-slate-700 dark:text-gray-300"
+        >
+          Welcome To Store.
+        </h2>
+        <p
+          class="pt-2 font-semibold text-[20px] text-slate-600 dark:text-gray-300"
+        >
+          <span
+            class="text-red-600 font-extrabold cursor-pointer hover:text-red-500 transition"
+            routerLink="/guest/register"
+            >Register</span
+          >
+          Now
+        </p>
+        <p
+          class="pt-4 font-semibold text-[20px] text-slate-600 dark:text-gray-300"
+        >
+          Login to continue
+        </p>
+      </div>
+      <!-- * ################### Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="handleForm()" class="pt-12 p-6">
+        <div class="bg-white py-8 px-6 shadow rounded-lg dark:bg-neutral-900">
+          <div class="py-2">
+            <label
+              for="mail"
+              class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+              >Email :</label
+            >
+            <input
+              formControlName="email"
+              type="email"
+              id="mail"
+              class="input font-bold dark:bg-[#1e1e1e]"
+            />
+          </div>
+
+          <div
+            class=""
+            *ngIf="
+              loginForm.get('email')?.value != '' &&
+              loginForm.get('email')?.errors
+            "
+          >
+            <p
+              class="text-red-600 font-bold text-center p-0 dark:text-gray-300"
+            >
+              Examble : xxx@gmail.com
+            </p>
+          </div>
+
+          <div class="py-2">
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+              >Password :</label
+            >
+            <input
+              formControlName="password"
+              type="password"
+              id="password"
+              class="input dark:bg-[#1e1e1e] font-bold"
+            />
+          </div>
+
+          <div
+            class="text-danger"
+            *ngIf="
+              loginForm.get('password')?.value != '' &&
+              loginForm.get('password')?.errors
+            "
+          >
+            <p
+              class="text-red-600 font-bold text-center p-0 dark:text-gray-300"
+            >
+              Password must be atleast 6 chars
+            </p>
+          </div>
+
+          <div class="d-flex justify-content-between pt-3">
+            <a
+              class="text-[16px] font-bold hover:text-red-400 transition text-red-700"
+              routerLink="/guest/forgetpassword"
+            >
+              Forget Password ?
+            </a>
+            <button
+              class="btn bg-red-600 hover:bg-red-500 transition text-white mt-2 w-full"
+              type="submit"
+            >
+              Login
+              <i *ngIf="isValid" class="fa-solid fa-spinner fa-spin"></i>
+            </button>
+          </div>
+          <p
+            *ngIf="errorMessage"
+            class="pt-3 text-red-600 font-bold text-center dark:text-gray-300"
+          >
+            {{ errorMessage }}
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
