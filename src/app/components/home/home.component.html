@@ -4,16 +4,16 @@
     <img
       src="./assets/images/pexels-karolina-grabowska-5632371.jpg"
       alt="search"
-      class="search"
+      class="search hidden md:block"
     />
     <div
-      class="absolute inset-0 flex items-center justify-center dark:bg-black dark:bg-opacity-50"
+      class="absolute inset-0 flex items-center justify-center dark:bg-[#15191d] dark:bg-opacity-75"
     ></div>
     <div
-      class="flex absolute lg:left-[300px] lg:top-[100px] mt-5 md:left-[100px] md:top-[100px] w-96 rounded bg-white border"
+      class="flex md:absolute static lg:left-[300px] lg:top-[100px] mt-5 md:left-[100px] md:top-[100px] w-96 rounded bg-white border"
     >
       <i
-        class="fa-solid fa-magnifying-glass fa-xl ic relative top-[18px] left-[10px]"
+        class="fa-solid fa-magnifying-glass fa-xl ic relative top-[25px] left-[10px]"
         style="color: #555555"
         aria-hidden="true"
       ></i>
@@ -23,7 +23,9 @@
         placeholder="Search....."
         [(ngModel)]="serchTerm"
       />
-      <button class="m-2 rounded bg-red-600 px-4 text-white dark:bg-slate-700">
+      <button
+        class="m-2 rounded bg-red-600 px-4 py-1 text-white dark:bg-slate-700"
+      >
         Search
       </button>
     </div>
@@ -42,7 +44,7 @@
           *ngIf="item.category.name == 'Electronics'"
         >
           <div
-            class="p-3 relative border-2 box mx-2 transition max-w-[350px] ms-5 md:ms-0 dark:bg-[#151515] dark:border-none"
+            class="p-3 relative border-2 box mx-2 transition max-w-[350px] ms-5 md:ms-0 dark:bg-[#212529] dark:border-none"
           >
             <div class="p-0">
               <img
@@ -56,7 +58,7 @@
               <p class="font-bold">
                 {{ item.title.split(" ").slice(0, 2).join(" ") }}
               </p>
-              <p class="font-bold text-red-600">
+              <p class="font-bold text-red-600 dark:text-[#FF4C29]">
                 {{ item.price | currency : " EGP " }}
               </p>
               <p
@@ -84,8 +86,7 @@
                   *ngFor="let _ of generateRatingArray(item.ratingsAverage)"
                 >
                   <i
-                    class="fa-solid fa-star repeat_here"
-                    style="color: #ff3b3b"
+                    class="fa-solid fa-star repeat_here text-red-600 dark:text-[#FF4C29]"
                   ></i>
                 </ng-container>
               </span>
@@ -101,9 +102,9 @@
                 <div class="cursor-pointer relative wish">
                   <i
                     class="fa-solid fa-heart text-[22px] dark:text-white"
-                    [class.text-red]="wishlistData.includes(item._id)"
-                    [class.text-black]="wishlistData.includes(item._id)!"
                     (click)="addOrRemove(item._id)"
+                    [class.text-red-500]="wishlistData.includes(item._id)"
+                    [class.dark:text-red-500]="wishlistData.includes(item._id)"
                   ></i>
                   <div
                     class="user-icon dark:bg-white dark:text-black"
@@ -158,7 +159,7 @@
 
 <!-- *############## -->
 <div
-  class="w-full h-[500px] bg-[#E5E6EF] flex justify-center dark:bg-[#1a1919]"
+  class="w-full h-[500px] bg-[#E5E6EF] flex justify-center dark:bg-[#212529]"
 >
   <div
     class="w-[80%] flex lg:justify-between justify-center flex-col md:flex-row"
@@ -197,7 +198,7 @@
       </div>
       <div class="text-center py-5">
         <button
-          class="bg-red-600 px-5 py-2 rounded-full transition hover:bg-red-500 mx-3 text-white font-bold"
+          class="bg-red-600 px-5 py-2 rounded-full transition hover:bg-red-500 mx-3 text-white font-bold dark:bg-[#FF4C29]"
           (click)="goUp()"
         >
           SHOP NOW
@@ -222,10 +223,13 @@
       <ng-template
         carouselSlide
         [id]="item.id"
-        *ngIf="item.category.name == 'Electronics'"
+        *ngIf="
+          item.category.name == 'Electronics' &&
+          item.id != '6408d79a6406cd15828e8ef8'
+        "
       >
         <div
-          class="p-3 relative border-2 box mx-2 transition max-w-[350px] ms-5 md:ms-0 dark:bg-[#151515] dark:border-none"
+          class="p-2 relative border-2 box mx-2 transition max-w-[350px] ms-5 md:ms-0 dark:bg-[#212529] dark:border-none"
         >
           <div class="p-0">
             <img
@@ -237,9 +241,9 @@
           <div class="text-center">
             <p>{{ item.brand.name }}</p>
             <p class="font-bold">
-              {{ item.title.split(" ").slice(0, 2).join(" ") }}
+              {{ item.title.split(" ").slice(0, 3).join(" ") }}
             </p>
-            <p class="font-bold text-red-600">
+            <p class="font-bold text-red-600 dark:text-[#FF4C29]">
               {{ item.price | currency : " EGP " }}
             </p>
             <p
@@ -267,8 +271,7 @@
                 *ngFor="let _ of generateRatingArray(item.ratingsAverage)"
               >
                 <i
-                  class="fa-solid fa-star repeat_here"
-                  style="color: #ff3b3b"
+                  class="fa-solid fa-star repeat_here text-[#ff3b3b] dark:text-[#FF4C29]"
                 ></i>
               </ng-container>
             </span>
@@ -284,9 +287,9 @@
               <div class="cursor-pointer relative wish">
                 <i
                   class="fa-solid fa-heart text-[22px] dark:text-white"
-                  [class.text-red]="wishlistData.includes(item._id)"
-                  [class.text-black]="wishlistData.includes(item._id)!"
                   (click)="addOrRemove(item._id)"
+                  [class.text-red-500]="wishlistData.includes(item._id)"
+                  [class.dark:text-red-500]="wishlistData.includes(item._id)"
                 ></i>
                 <div
                   class="user-icon dark:bg-white dark:text-black"

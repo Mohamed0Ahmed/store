@@ -1,6 +1,6 @@
 <!-- *###### -->
 
-<div [class.dark]="darkMode" class="dark:bg-[#1e1e1e]">
+<div [class.dark]="darkMode" class="dark:bg-[#15191d]">
   <router-outlet></router-outlet>
 </div>
 
@@ -10,11 +10,11 @@
 >
   <button
     (click)="toggle()"
-    class="bg-slate-900 px-3 py-2 rounded-full dark:bg-black"
+    class="bg-slate-900 px-3 py-2 rounded-full dark:bg-cyan-100"
   >
     <span *ngIf="darkMode" class="flex items-center">
-      <span class="text-white hidden md:block mx-2"> Light </span>
-      <i class="fa-solid fa-moon text-[20px]" style="color: #fefefe"></i>
+      <span class="text-black hidden md:block mx-2"> Light </span>
+      <i class="fa-solid fa-moon text-[20px]" style="color: #000000"></i>
     </span>
     <span *ngIf="!darkMode" class="flex items-center">
       <span class="text-white hidden md:block mx-2"> Dark </span>

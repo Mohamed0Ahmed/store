@@ -1,1 +1,107 @@
-<p>profile works!</p>
+<section
+  class="flex flex-col md:flex-row md:items-center justify-center min-h-[95vh] bg-gray-300 dark:bg-[#15191d]"
+>
+  <div class="lg-w[60%] p-5 relative">
+    <img [src]="photo" alt="user" class="lg:w-[400px] w-[300px] rounded-full" />
+    <span
+      class="absolute right-[60px] bottom-[60px] rounded-full py-2 px-2 bg-[#232b28] dark:bg-slate-500"
+      (click)="onUploadClicked()"
+      ><i class="fa-solid fa-pencil text-[25px] text-slate-200 cursor-pointer">
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          class="hidden"
+          #fileInput /></i
+    ></span>
+    <span
+      class="absolute left-[60px] bottom-[60px] rounded-full py-2 px-2 bg-[#232b28] dark:bg-slate-500"
+      (click)="remove()"
+      ><i class="fa-solid fa-ban text-[25px] text-slate-200 cursor-pointer"> </i
+    ></span>
+  </div>
+  <div class="md:p-5 lg:w-[40%] px-5 md:px-0">
+    <h2 class="text-[40px] font-bold py-6 text-slate-700 dark:text-white">
+      MY PROFILE
+      <i
+        class="fa-solid fa-pencil md:text-[25px] mx-3 text-slate-700 dark:text-slate-100 cursor-pointer"
+        routerLink="/setting"
+      ></i>
+    </h2>
+
+    <div class="pt-6">
+      <div class="flex flex-col lg:flex-row lg:justify-between">
+        <div class="my-3">
+          <h2 class="font-bold text-[20px] text-gray-500">Name :</h2>
+          <span
+            class="border-b border-b-slate-500 text-slate-700 font-bold md:text-[25px] dark:text-gray-200"
+            >{{ userName }}</span
+          >
+          <span> </span>
+        </div>
+        <div class="my-3">
+          <h2 class="font-bold text-[20px] text-gray-500">E-Mail :</h2>
+          <span
+            class="border-b border-b-slate-500 text-slate-700 font-bold md:text-[25px] dark:text-gray-200"
+            >{{ userEmail }}</span
+          >
+          <span> </span>
+        </div>
+      </div>
+
+      <div class="pt-4 flex items-center">
+        <h2 class="font-bold text-[20px] text-gray-500">Phone :</h2>
+        <div *ngIf="usernumber" class="mx-3">
+          <span
+            class="border-b border-b-slate-500 text-slate-700 font-bold md:text-[25px] dark:text-gray-200"
+            >{{ usernumber }}</span
+          >
+          <span> </span>
+        </div>
+        <div *ngIf="!usernumber" class="mx-3">
+          <span
+            class="font-bold md:text-[20px] text-slate-700 cursor-pointer dark:text-gray-200"
+            routerLink="/setting"
+            >Add +</span
+          >
+        </div>
+      </div>
+      <div class="pt-5 flex items-center">
+        <h2 class="font-bold text-[20px] text-gray-500">Age :</h2>
+        <div *ngIf="userAge" class="mx-3">
+          <span
+            class="border-b border-b-slate-500 text-slate-700 font-bold md:text-[25px] dark:text-gray-200"
+            >{{ userAge }}</span
+          >
+          <span> </span>
+        </div>
+        <div *ngIf="!userAge" class="mx-3">
+          <span
+            class="font-bold md:text-[20px] text-slate-700 cursor-pointer dark:text-gray-200"
+            routerLink="/setting"
+            >Add +</span
+          >
+        </div>
+      </div>
+      <div class="pt-4 flex items-center">
+        <h2 class="font-bold text-[20px] text-gray-500">Address :</h2>
+        <div *ngIf="userAdress" class="mx-3">
+          <span
+            class="border-b border-b-slate-500 text-slate-700 font-bold md:text-[25px] dark:text-gray-200"
+            >{{ userAdress }}</span
+          >
+          <span> </span>
+        </div>
+        <div *ngIf="!userAdress" class="mx-3">
+          <span
+            class="font-bold md:text-[20px] text-slate-700 cursor-pointer dark:text-gray-200"
+            routerLink="/setting"
+            >Add +</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center md:justify-end pt-5">
+      <button class="btn-set" routerLink="/setting">Go Settings</button>
+    </div>
+  </div>
+</section>

@@ -1,1 +1,146 @@
-<p>forgot-pass works!</p>
+<section class="container mx-auto dark:text-black">
+  <div class="flex md:flex-col lg:flex-row lg:pt-12 items-center">
+    <div class="lg:w-[60%] hidden md:block">
+      <img src="./assets/images/forget.png" alt="svg" class="w-full" />
+    </div>
+
+    <!-- *###  1  -->
+    <div
+      class="w-full lg:w-[30%] bg-[#f7f7f7] shadow-sm dark:shadow-gray-400 rounded-xl h-[90vh] md:h-[100%] dark:bg-[#313b4b]"
+      *ngIf="step1"
+    >
+      <div class="pt-12 text-center">
+        <h2
+          class="font-extrabold text-[30px] text-slate-700 dark:text-gray-300"
+        >
+          Write Your Email.
+        </h2>
+      </div>
+      <!-- * ################### Form -->
+      <form class="pt-12 p-6" [formGroup]="forgot" (ngSubmit)="forgotPass()">
+        <div class="bg-white py-8 px-6 shadow-2xl rounded-lg dark:bg-[#313b4b]">
+          <div class="py-2">
+            <label
+              for="mail"
+              class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+              >Email :</label
+            >
+            <input
+              formControlName="email"
+              type="email"
+              id="mail"
+              class="input font-bold dark:bg-white]"
+            />
+          </div>
+          <!-- * -->
+          <div class="d-flex justify-content-between pt-3">
+            <button
+              class="btn bg-red-600 hover:bg-red-500 transition font-bold text-white mt-2 w-full dark:bg-[#FF4C29] dark:hover:bg-[#FF9800]"
+              type="submit"
+              [disabled]="forgot.invalid"
+            >
+              SEND CODE
+            </button>
+          </div>
+          <p
+            class="pt-3 text-gray-700 font-bold text-center dark:text-gray-300"
+          >
+            {{ userMsg }}
+          </p>
+        </div>
+      </form>
+    </div>
+    <!--* ### 2   -->
+    <div
+      class="w-full lg:w-[30%] bg-[#f7f7f7] shadow-sm dark:shadow-gray-400 rounded-xl h-[90vh] md:h-[100%] dark:bg-[#313b4b]"
+      *ngIf="step2"
+    >
+      <div class="pt-12 text-center">
+        <h2
+          class="font-extrabold text-[30px] text-slate-700 dark:text-gray-300"
+        >
+          Enter The Code .
+        </h2>
+      </div>
+      <!-- * ################### Form -->
+      <form class="pt-12 p-6" [formGroup]="resetCode" (ngSubmit)="resetCod()">
+        <div class="bg-white py-8 px-6 shadow-2xl rounded-lg dark:bg-[#313b4b]">
+          <div class="py-2">
+            <label
+              for="code"
+              class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+              >Code :</label
+            >
+            <input
+              formControlName="resetCode"
+              type="tel"
+              id="code"
+              class="input font-bold dark:bg-white]"
+            />
+          </div>
+
+          <div class="d-flex justify-content-between pt-3">
+            <button
+              class="btn bg-red-600 hover:bg-red-500 transition font-bold text-white mt-2 w-full dark:bg-[#FF4C29] dark:hover:bg-[#FF9800]"
+              type="submit"
+              [disabled]="forgot.invalid"
+            >
+              Confirm The Code
+            </button>
+          </div>
+          <p
+            class="pt-3 text-gray-700 font-bold text-center dark:text-gray-300"
+          >
+            {{ userMsg }}
+          </p>
+        </div>
+      </form>
+    </div>
+    <!--* ### 3   -->
+    <div
+      class="w-full lg:w-[30%] bg-[#f7f7f7] shadow-sm dark:shadow-gray-400 rounded-xl h-[90vh] md:h-[100%] dark:bg-[#313b4b]"
+      *ngIf="step3"
+    >
+      <div class="pt-12 text-center">
+        <h2
+          class="font-extrabold text-[30px] text-slate-700 dark:text-gray-300"
+        >
+          Make your New Password.
+        </h2>
+      </div>
+      <!-- * ################### Form -->
+      <form class="pt-12 p-6" [formGroup]="newPass" (ngSubmit)="newPassword()">
+        <div class="bg-white py-8 px-6 shadow-2xl rounded-lg dark:bg-[#313b4b]">
+          <div class="py-2">
+            <label
+              for="pass"
+              class="block text-sm font-medium text-gray-600 dark:text-gray-300"
+              >New Password :</label
+            >
+            <input
+              formControlName="newPassword"
+              type="password"
+              id="pass"
+              class="input font-bold dark:bg-white]"
+            />
+          </div>
+
+          <div class="d-flex justify-content-between pt-3">
+            <button
+              class="btn bg-red-600 hover:bg-red-500 transition font-bold text-white mt-2 w-full dark:bg-[#FF4C29] dark:hover:bg-[#FF9800]"
+              type="submit"
+              [disabled]="forgot.invalid"
+            >
+              Update your password
+            </button>
+          </div>
+          <p
+            class="pt-3 text-gray-700 font-bold text-center dark:text-gray-300"
+          >
+            {{ userMsg }}
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

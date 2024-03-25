@@ -41,14 +41,7 @@ const routes: Routes = [
           ),
         title: 'Wishlist',
       },
-      {
-        path: 'category',
-        loadComponent: () =>
-          import('./components/categories/categories.component').then(
-            (m) => m.CategoriesComponent
-          ),
-        title: 'Category',
-      },
+
       {
         path: 'allorders',
         loadComponent: () =>
@@ -66,12 +59,12 @@ const routes: Routes = [
         title: 'Profile',
       },
       {
-        path: 'settings',
+        path: 'setting',
         loadComponent: () =>
           import('./components/setting/setting.component').then(
             (m) => m.SettingComponent
           ),
-        title: 'Settings',
+        title: 'Setting',
       },
       {
         path: 'checkout',
@@ -127,14 +120,6 @@ const routes: Routes = [
             (m) => m.WishlistComponent
           ),
         title: 'Wishlist',
-      },
-      {
-        path: 'category',
-        loadComponent: () =>
-          import('./components/categories/categories.component').then(
-            (m) => m.CategoriesComponent
-          ),
-        title: 'Category',
       },
       {
         path: 'register',

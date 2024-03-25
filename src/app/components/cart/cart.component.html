@@ -28,7 +28,7 @@
   <!-- * small screen -->
   <div *ngIf="numberOfItems != 0" class="md:hidden">
     <div
-      class="bg-white p-4 rounded-lg shadow dark:bg-[#1e1e1e]"
+      class="bg-white p-4 rounded-lg shadow dark:bg-[#15191d]"
       *ngFor="let item of cartDetails.products"
     >
       <div class="flex items-center justify-between">
@@ -89,7 +89,7 @@
             <th class="p-3 text-[20px] font-bold tracking-wide">RATING</th>
           </tr>
         </thead>
-        <tbody class="bg-gray-100 dark:bg-[#111111] h-[70vh]">
+        <tbody class="bg-gray-100 dark:bg-[#212529] h-[70vh]">
           <tr class="text-center" *ngFor="let item of cartDetails.products">
             <td class="p-3 text-[16px] text-gray-700">
               <i
@@ -107,13 +107,13 @@
             <td class="p-3 text-[20px] font-bold text-gray-700 dark:text-white">
               {{ item.product.title.split(" ").slice(0, 2).join(" ") }}
             </td>
-            <td class="p-3 text-[16px] text-red-500 font-bold dark:text-white">
+            <td class="p-3 text-[16px] text-gray-700 font-bold dark:text-white">
               {{ item.price | currency : " EGP " }}
             </td>
-            <td class="p-3 text-[16px] text-red-500 font-bold dark:text-white">
+            <td class="p-3 text-[16px] text-gray-700 font-bold dark:text-white">
               <div class="font-extrabold text-[20px]">
                 <button
-                  class="w-[30px] h-[30px] bg-red-600 hover:bg-red-500 rounded-full text-white"
+                  class="w-[30px] h-[30px] bg-gray-600 hover:bg-gray-400 rounded-full text-white"
                   (click)="updateCount(item.product._id, item.count - 1)"
                   [disabled]="item.count == 1"
                 >
@@ -121,14 +121,14 @@
                 </button>
                 <span class="px-2"> {{ item.count }} </span>
                 <button
-                  class="w-[30px] h-[30px] bg-red-600 hover:bg-red-500 rounded-full text-white"
+                  class="w-[30px] h-[30px] bg-gray-600 hover:bg-gray-400 rounded-full text-white"
                   (click)="updateCount(item.product._id, item.count + 1)"
                 >
                   +
                 </button>
               </div>
             </td>
-            <td class="p-3 text-[16px] text-red-500 font-bold dark:text-white">
+            <td class="p-3 text-[16px] text-gray-700 font-bold dark:text-white">
               {{ item.price * item.count | currency : " EGP " }}
             </td>
             <td
@@ -159,7 +159,7 @@
       </table>
     </div>
     <div
-      class="flex flex-col md:flex-row justify-between p-5 bg-gray-100 dark:bg-[#111111] rounded-lg relative top-[-20px]"
+      class="flex flex-col md:flex-row justify-between p-5 bg-gray-100 dark:bg-[#212529] rounded-lg relative top-[-20px]"
     >
       <div class="flex flex-col md:flex-row">
         <button class="btn bg-red-600 hover:bg-red-400 text-white font-bold">

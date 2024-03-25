@@ -1,1 +1,118 @@
-<p>setting works!</p>
+<section class="bg-gray-300 dark:bg-[#15191d] min-h-[95vh] dark:text-white">
+  <div class="container mx-auto flex">
+    <div class="flex flex-col pt-5 w-[30%]">
+      <div>
+        <h2 class="font-bold md:text-[40px]">Personal Information</h2>
+
+        <form [formGroup]="updateName" (ngSubmit)="changeName()">
+          <label for="name" class="font-bold">Name : </label>
+
+          <input
+            formControlName="name"
+            type="text"
+            id="name"
+            class="input placeholder:text-slate-600 font-bold placeholder:font-light"
+            [placeholder]="userName"
+          />
+          <p
+            class="font-bold text-slate-500 py-2 dark:text-white"
+            *ngIf="nameUpdated"
+          >
+            Name Updated !
+          </p>
+
+          <button class="btn-set" [disabled]="updateName.invalid">
+            Update
+          </button>
+        </form>
+      </div>
+      <!-- * -->
+      <div class="pt-6">
+        <form [formGroup]="registerForm" (ngSubmit)="updateEmail()">
+          <label for="mail" class="font-bold">Eamil : </label>
+
+          <input
+            formControlName="email"
+            type="text"
+            id="mail"
+            class="input placeholder:text-slate-600 font-bold placeholder:font-light"
+            [placeholder]="userEmail"
+          />
+          <p
+            class="font-bold text-slate-500 py-2 dark:text-white"
+            *ngIf="mailUpdated"
+          >
+            {{ mailUpdated }}
+          </p>
+
+          <button class="btn-set">Update</button>
+        </form>
+      </div>
+      <!-- * -->
+      <div class="pt-6">
+        <form [formGroup]="address" (ngSubmit)="addAddress()">
+          <label for="details" class="font-bold">Address : </label>
+          <input
+            formControlName="details"
+            type="text"
+            id="details"
+            class="input placeholder:text-slate-600 font-bold placeholder:font-light"
+            [placeholder]="userAdres"
+          />
+          <p
+            class="font-bold text-slate-500 py-2 dark:text-white"
+            *ngIf="addressUpdated"
+          >
+            {{ addressUpdated }}
+          </p>
+
+          <button class="btn-set" [disabled]="address.invalid">Update</button>
+        </form>
+      </div>
+      <!-- * -->
+      <div class="pt-6">
+        <form [formGroup]="age" (ngSubmit)="addAge()">
+          <label for="age" class="font-bold">Age : </label>
+          <input
+            formControlName="input"
+            type="tel"
+            id="age"
+            class="input placeholder:text-slate-600 font-bold placeholder:font-light"
+            [placeholder]="userAge"
+          />
+          <p
+            class="font-bold text-slate-500 py-2 dark:text-white"
+            *ngIf="ageUpdated"
+          >
+            {{ ageUpdated }}
+          </p>
+
+          <button class="btn-set">Update</button>
+        </form>
+      </div>
+      <!-- * -->
+      <div class="pt-6">
+        <form [formGroup]="number" (ngSubmit)="addnumber()">
+          <label for="phone" class="font-bold">Phone : </label>
+          <input
+            formControlName="input"
+            type="tel"
+            id="phone"
+            class="input placeholder:text-slate-600 font-bold placeholder:font-light"
+            [placeholder]="userPhone"
+          />
+          <p
+            class="font-bold text-slate-500 py-2 dark:text-white"
+            *ngIf="numberUpdated"
+          >
+            {{ numberUpdated }}
+          </p>
+
+          <button class="btn-set">Update</button>
+        </form>
+      </div>
+    </div>
+    <!--**############  -->
+    <div class="w-[50%]"></div>
+  </div>
+</section>

@@ -29,12 +29,15 @@
 }
 
 .hot {
-  @apply bg-red-600 w-[100px] mx-1 h-[80px] md:h-[100px] rounded-[50%] text-white flex flex-col text-center justify-center;
+  @apply bg-red-600 w-[100px] mx-1 h-[80px] md:h-[100px] rounded-[50%] dark:bg-[#FF4C29] text-white flex flex-col text-center justify-center;
 }
 .btn {
-  @apply px-5 py-2 rounded-full transition;
+  @apply px-5 py-2 rounded-full transition dark:bg-[#FF4C29] dark:hover:bg-[#FF9800];
 }
 .input {
-  @apply w-full border border-gray-300 px-3 py-2 
-  rounded-lg shadow-sm focus:outline-none focus:border-indigo-300 focus:ring-1 focus:ring-indigo-300 my-1;
+  @apply w-full border border-gray-300 px-3 py-1 
+  rounded-lg shadow-sm focus:outline-none focus:border-indigo-300 focus:ring-1 focus:ring-indigo-300 my-1  dark:text-black;
+}
+.btn-set {
+  @apply px-3 py-1 rounded-full transition dark:bg-[#FF4C29] dark:hover:bg-[#FF9800] bg-slate-900 hover:bg-slate-700 text-white font-bold;
 }

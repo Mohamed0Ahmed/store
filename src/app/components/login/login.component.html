@@ -1,4 +1,4 @@
-<section class="container mx-auto dark:text-gray-300">
+<section class="container mx-auto dark:text-black">
   <div class="flex md:flex-col lg:flex-row lg:pt-12 items-center">
     <div class="lg:w-[60%] hidden md:block">
       <img
@@ -8,7 +8,7 @@
       />
     </div>
     <div
-      class="w-full lg:w-[30%] bg-[#f7f7f7] shadow-sm dark:shadow-gray-400 rounded-xl h-[90vh] md:h-[100%] dark:bg-neutral-900"
+      class="w-full lg:w-[30%] bg-[#f7f7f7] shadow-sm dark:shadow-gray-400 rounded-xl h-[90vh] md:h-[100%] dark:bg-[#313b4b]"
     >
       <div class="pt-12 text-center">
         <h2
@@ -20,7 +20,7 @@
           class="pt-2 font-semibold text-[20px] text-slate-600 dark:text-gray-300"
         >
           <span
-            class="text-red-600 font-extrabold cursor-pointer hover:text-red-500 transition"
+            class="text-red-600 font-extrabold cursor-pointer hover:text-red-500 transition dark:text-[#FF4C29] dark:hover:text-[#FF9800]"
             routerLink="/guest/register"
             >Register</span
           >
@@ -34,7 +34,7 @@
       </div>
       <!-- * ################### Form -->
       <form [formGroup]="loginForm" (ngSubmit)="handleForm()" class="pt-12 p-6">
-        <div class="bg-white py-8 px-6 shadow rounded-lg dark:bg-neutral-900">
+        <div class="bg-white py-8 px-6 shadow-2xl rounded-lg dark:bg-[#313b4b]">
           <div class="py-2">
             <label
               for="mail"
@@ -45,7 +45,7 @@
               formControlName="email"
               type="email"
               id="mail"
-              class="input font-bold dark:bg-[#1e1e1e]"
+              class="input font-bold dark:bg-white]"
             />
           </div>
 
@@ -73,7 +73,7 @@
               formControlName="password"
               type="password"
               id="password"
-              class="input dark:bg-[#1e1e1e] font-bold"
+              class="input dark:bg-white font-bold"
             />
           </div>
 
@@ -93,13 +93,13 @@
 
           <div class="d-flex justify-content-between pt-3">
             <a
-              class="text-[16px] font-bold hover:text-red-400 transition text-red-700"
+              class="text-[16px] font-bold hover:text-red-400 transition text-red-700 dark:text-[#FF4C29] dark:hover:text-[#FF9800]"
               routerLink="/guest/forgetpassword"
             >
               Forget Password ?
             </a>
             <button
-              class="btn bg-red-600 hover:bg-red-500 transition text-white mt-2 w-full"
+              class="btn bg-red-600 hover:bg-red-500 transition text-white mt-2 w-full dark:bg-[#FF4C29] dark:hover:bg-[#FF9800]"
               type="submit"
             >
               Login

@@ -15,7 +15,7 @@
         Your Wishlist is empty.
       </h2>
       <button
-        class="btn bg-red-700 hover:bg-red-500 font-bold text-white"
+        class=" bg-red-700 hover:bg-red-500 font-bold text-white btn"
         routerLink="/home"
       >
         Go To Shopping
@@ -39,7 +39,7 @@
             <th class="p-3 text-[20px] font-bold tracking-wide">ADD TO CART</th>
           </tr>
         </thead>
-        <tbody class="bg-gray-100 dark:bg-[#111111] h-[80vh]">
+        <tbody class="bg-gray-100 dark:bg-[#212529] h-[80vh]">
           <tr class="text-center" *ngFor="let item of productData">
             <td class="p-3 text-[16px] text-gray-700">
               <i
@@ -83,7 +83,7 @@
   <!-- * small screen -->
   <div *ngIf="productData.length != 0" class="md:hidden">
     <div
-      class="bg-white p-4 rounded-lg shadow dark:bg-[#1e1e1e]"
+      class="bg-white p-4 rounded-lg shadow dark:bg-[#15191d]"
       *ngFor="let item of productData"
     >
       <div class="flex items-center justify-between">

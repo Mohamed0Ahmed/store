@@ -1,1 +1,99 @@
-<p>details works!</p>
+<section class=" ">
+  <div class="bg-white lg:px-[100px]">
+    <div
+      class="flex flex-col md:flex-row shadow-2xl min-h-[95vh] md:items-center md:justify-center"
+    >
+      <div class="md:w-[50%]">
+        <div class="flex items-center justify-center">
+          <img [src]="pathImg" alt="item" class="md:w-[450px] w-[200px]" />
+        </div>
+        <div class="p-5">
+          <owl-carousel-o [options]="electro">
+            <ng-container *ngFor="let item of productDetails.images">
+              <ng-template carouselSlide>
+                <div
+                  class="p-3 relative border-2 mx-2 transition max-w-[350px] ms-5 md:ms-0"
+                  [class.border-red-500]="item == pathImg"
+                >
+                  <div class="p-0">
+                    <img
+                      [src]="item"
+                      alt="image"
+                      class=""
+                      (click)="sayHello(item)"
+                    />
+                  </div>
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+      </div>
+      <div class="flex flex-col items-center justify-center px-12">
+        <div>
+          <h2 class="text-[24px] font-extrabold">
+            {{ productDetails.title.split(" ").slice(0, 3).join(" ") }}
+          </h2>
+          <hr />
+          <h2 class="text-[16px] font-bold text-gray-600 py-5">
+            {{ productDetails.description }}
+          </h2>
+        </div>
+        <div class="flex justify-between w-full pt-5">
+          <div class="font-bold">RATING :</div>
+          <div>
+            <ng-container
+              *ngFor="
+                let _ of generateRatingArray(productDetails.ratingsAverage)
+              "
+            >
+              <i
+                class="fa-solid fa-star repeat_here text-[#ff3b3b] dark:text-[#FF4C29]"
+              ></i>
+            </ng-container>
+          </div>
+        </div>
+        <div class="flex justify-between w-full pt-5">
+          <div class="font-bold">AVAILABE NOW :</div>
+          <div class="font-bold">
+            {{ productDetails.quantity }}
+          </div>
+        </div>
+        <div class="flex justify-between w-full pt-5">
+          <div class="font-bold">Price :</div>
+          <div class="font-bold">
+            {{ productDetails.price | currency : " EGP " }}
+          </div>
+        </div>
+        <div class="flex justify-between w-full pt-5">
+          <div class="font-bold">Sold :</div>
+          <div class="font-bold">
+            {{ productDetails.sold }}
+          </div>
+        </div>
+        <div class="flex justify-between w-full pt-5">
+          <div class="font-bold">Sale :</div>
+          <div class="font-bold">
+            <span *ngIf="productDetails.price > 3000"> -20% </span>
+            <span
+              *ngIf="productDetails.price < 3000 && productDetails.price > 1500"
+            >
+              -16%
+            </span>
+            <span *ngIf="productDetails.price < 1500"> -12% </span>
+          </div>
+        </div>
+        <div class="flex justify-center pt-5 w-full">
+          <div>
+            <button
+              class="btn bg-red-700 hover:bg-red-500 text-white font-bold"
+              (click)="addCart(productDetails._id)"
+            >
+              Add To Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

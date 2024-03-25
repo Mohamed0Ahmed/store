@@ -1,5 +1,5 @@
 <div
-  class="py-5 bg-slate-900 fixed top-0 left-0 right-0 z-40 border-b-4 border-b-red-600 dark:bg-black"
+  class="py-5 bg-slate-900 fixed top-0 left-0 right-0 z-40 border-b-4 border-b-red-600 dark:bg-[#313b4b]"
 >
   <nav
     class="lg:container px-3 md:px-0 mx-auto text-white flex items-center justify-between"
@@ -15,7 +15,7 @@
     </div>
 
     <!-- * links -->
-    <div class="links dark:bg-black" [class.hidden]="menuOpen">
+    <div class="links dark:bg-[#313b4b]" [class.hidden]="menuOpen">
       <ul class="flex md:flex-row flex-col items-center md:gap-[1vw] gap-6">
         <li
           (click)="toggleNav()"
@@ -23,12 +23,6 @@
           class="tracking-wide font-medium text-1xl hover:text-gray-500 transition"
         >
           <a routerLink="home">Home</a>
-        </li>
-        <li
-          (click)="toggleNav()"
-          class="tracking-wide font-medium text-1xl hover:text-gray-500 transition"
-        >
-          <a routerLink="category">Category</a>
         </li>
 
         <li
@@ -77,14 +71,37 @@
     </div>
 
     <!-- * sign in -->
-    <div class="text-center flex">
-      <button
-        class="bg-red-800 px-5 py-2 rounded-full transition hover:bg-red-400 mx-3"
-        routerLink="login"
-        (click)="logout()"
-      >
-        Logout
+    <div class="text-center flex relative">
+      <button class="mx-3" (click)="togglemenu()">
+        <img
+          [src]="photo"
+          alt="user"
+          class="w-[40px] rounded-full"
+        />
       </button>
+      <div
+        class="absolute top-[50px] left-[-50px] w-[150px] bg-slate-200 dark:bg-slate-950 rounded-lg text-white p-3 flex flex-col opacity-0"
+        [class.opacity-100]="userOpen"
+      >
+        <button
+          class="py-1 px-3 bg-slate-800 hover:bg-slate-600 transition rounded-lg font-bold my-2"
+          (click)="profile()"
+        >
+          Profile
+        </button>
+        <button
+          class="py-1 px-3 bg-slate-800 hover:bg-slate-600 transition rounded-lg font-bold my-2"
+          (click)="setting()"
+        >
+          Setting
+        </button>
+        <button
+          class="py-1 px-3 bg-slate-800 hover:bg-slate-600 transition rounded-lg font-bold my-2"
+          (click)="logout()"
+        >
+          Sign Out
+        </button>
+      </div>
       <!-- * menu -->
       <div class="md:hidden">
         <button (click)="toggleNav()">

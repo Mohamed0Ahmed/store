@@ -52,6 +52,15 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('eToken')) {
       this.isUser = true;
     }
+    //* get wish list
+    this._WishlistService.getWishlist().subscribe({
+      next: (response) => {
+        const data = response.data.map((item: any) => {
+          return item._id;
+        });
+        this.wishlistData = data;
+      },
+    });
   }
   //* slider
   electro: OwlOptions = {
