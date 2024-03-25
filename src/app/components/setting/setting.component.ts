@@ -11,6 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-setting',
@@ -22,7 +23,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class SettingComponent implements OnInit {
   constructor(
     private _UserService: UserService,
-    private _FormBuilder: FormBuilder
+    private _AuthService: AuthService
   ) {}
 
   photo: string = './assets/images/user.jpg';
@@ -42,8 +43,12 @@ export class SettingComponent implements OnInit {
   ageUpdated: string = '';
   numberUpdated: string = '';
   addressUpdated: string = '';
+  passMsg: string = '';
 
   ngOnInit(): void {
+    //*
+    this._AuthService.saveUserData();
+
     //* get id
     if (localStorage.getItem('eToken')) {
       let encodeToken: any = localStorage.getItem('eToken');
@@ -177,7 +182,8 @@ export class SettingComponent implements OnInit {
   //* #### Update Age
   //* age form
   age: FormGroup = new FormGroup({
-    input: new FormControl('', [
+    age: new FormControl('', [
+      Validators.required,
       Validators.pattern(/^(1[0-9]|2[0-9]|[3-5][0-9]|60)$/),
     ]),
   });
@@ -219,5 +225,52 @@ export class SettingComponent implements OnInit {
       this.numberUpdated = 'Updated';
       nameInput.value = '';
     }
+  }
+  //* Reset password
+
+  resetPassword: FormGroup = new FormGroup(
+    {
+      currentPassword: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\w{6,12}$/),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\w{6,12}$/),
+      ]),
+      rePassword: new FormControl(''),
+    },
+    { validators: [this.confirmPass] } as FormControlOptions
+  );
+
+  //* ##### confirmPassword ######
+  confirmPass(group: FormGroup): void {
+    const pass = group.get('password');
+    const rePass = group.get('rePassword');
+    if (rePass?.value == '') {
+      rePass?.setErrors({ required: true });
+    } else if (pass?.value != rePass?.value) {
+      rePass?.setErrors({ missMatch: true });
+    }
+  }
+  resetPass(): void {
+    const userData = this.resetPassword.value;
+    this.passMsg = '';
+    this.passMsg = '';
+    this._UserService.updataPass(userData).subscribe({
+      next: (response) => {
+        console.log(response);
+        localStorage.setItem('eToken', response.token);
+        this.passMsg = response.message;
+        this.resetPassword.reset();
+        localStorage.setItem('eToken', response.token);
+        localStorage.setItem(`${this.userId} name ` , response.user.name)
+        
+      },
+      error: (err) => {
+        console.log(err);
+        this.passMsg = err.error.errors.msg;
+      },
+    });
   }
 }

@@ -41,7 +41,6 @@ export class ProfileComponent implements OnInit {
 
       this.userId = this.Dataaa.id;
       this.userEmail = this.Dataaa.id;
-      this.userName = localStorage.getItem(`${this.userId} name `)!;
       this.userEmail = localStorage.getItem('mail')!;
     }
     //*#####

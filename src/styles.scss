@@ -39,5 +39,5 @@
   rounded-lg shadow-sm focus:outline-none focus:border-indigo-300 focus:ring-1 focus:ring-indigo-300 my-1  dark:text-black;
 }
 .btn-set {
-  @apply px-3 py-1 rounded-full transition dark:bg-[#FF4C29] dark:hover:bg-[#FF9800] bg-slate-900 hover:bg-slate-700 text-white font-bold;
+  @apply px-3 py-1 rounded-full transition dark:bg-slate-600 dark:hover:bg-slate-300 bg-slate-900 hover:bg-slate-700 text-white font-bold;
 }

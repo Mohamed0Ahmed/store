@@ -1,6 +1,10 @@
-<section class="bg-gray-300 dark:bg-[#15191d] min-h-[95vh] dark:text-white">
-  <div class="container mx-auto flex">
-    <div class="flex flex-col pt-5 w-[30%]">
+<section class="bg-gray-300 dark:bg-[#15191d] dark:text-white">
+  <div
+    class="container mx-auto flex md:justify-evenly lg:flex-row flex-col items-center min-h-[95vh]"
+  >
+    <div
+      class="flex flex-col p-5 mt-5 w-full lg:w-[40%] shadow-xl shadow-slate-400 bg-slate-100 rounded-xl dark:bg-slate-800 dark:shadow-none"
+    >
       <div>
         <h2 class="font-bold md:text-[40px]">Personal Information</h2>
 
@@ -74,7 +78,7 @@
         <form [formGroup]="age" (ngSubmit)="addAge()">
           <label for="age" class="font-bold">Age : </label>
           <input
-            formControlName="input"
+            formControlName="age"
             type="tel"
             id="age"
             class="input placeholder:text-slate-600 font-bold placeholder:font-light"
@@ -95,7 +99,7 @@
         <form [formGroup]="number" (ngSubmit)="addnumber()">
           <label for="phone" class="font-bold">Phone : </label>
           <input
-            formControlName="input"
+            formControlName="phone"
             type="tel"
             id="phone"
             class="input placeholder:text-slate-600 font-bold placeholder:font-light"
@@ -113,6 +117,109 @@
       </div>
     </div>
     <!--**############  -->
-    <div class="w-[50%]"></div>
+    <div
+      class="flex flex-col relative w-full p-5 mt-5 lg:w-[40%] shadow-xl shadow-slate-400 bg-slate-100 rounded-xl dark:bg-slate-800 dark:shadow-none"
+    >
+      <h2 class="font-bold md:text-[40px]">Privacy</h2>
+
+      <div class="pt-5">
+        <form
+          [formGroup]="resetPassword"
+          (ngSubmit)="resetPass()"
+          class="font-bold"
+        >
+          <div class="py-4">
+            <label for="oldPass">Password : </label>
+            <input
+              type="password"
+              class="input"
+              id="oldPass"
+              placeholder="Current Password"
+              formControlName="currentPassword"
+            />
+          </div>
+          <!-- * validation -->
+          <div
+            class="text-slate-600 text-center dark:text-slate-100"
+            *ngIf="
+              (resetPassword.get('currentPassword')?.touched ||
+                resetPassword.get('currentPassword')?.value != '') &&
+              resetPassword.get('currentPassword')?.errors
+            "
+          >
+            <p
+              class=""
+              *ngIf="resetPassword.get('currentPassword')?.getError('pattern')"
+            >
+              Password must be atleast 6 chars
+            </p>
+          </div>
+          <div class="py-4">
+            <label for="newPass" class="">NewPassword : </label>
+            <input
+              type="password"
+              class="input"
+              id="newPass"
+              placeholder="New Password"
+              formControlName="password"
+            />
+          </div>
+          <!-- * validation -->
+          <div
+            class="text-slate-600 text-center dark:text-slate-100"
+            *ngIf="
+              (resetPassword.get('password')?.touched ||
+                resetPassword.get('password')?.value != '') &&
+              resetPassword.get('password')?.errors
+            "
+          >
+            <p
+              class=""
+              *ngIf="resetPassword.get('password')?.getError('pattern')"
+            >
+              Password must be atleast 6 chars and no special chars
+            </p>
+          </div>
+          <div class="py-4">
+            <label for="confirmPass">Confirm New Password : </label>
+            <input
+              type="password"
+              class="pt-4 input"
+              id="confirmPass"
+              formControlName="rePassword"
+              placeholder="Re New Password"
+            />
+          </div>
+          <!-- * validation -->
+          <div
+            class="text-slate-600 text-center dark:text-slate-100"
+            *ngIf="
+              (resetPassword.get('rePassword')?.touched ||
+                resetPassword.get('rePassword')?.value != '') &&
+              resetPassword.get('rePassword')?.errors
+            "
+          >
+            <p
+              class=""
+              *ngIf="resetPassword.get('rePassword')?.getError('missMatch')"
+            >
+              RePassword must be match Password
+            </p>
+          </div>
+          <button class="btn-set" [disabled]="resetPassword.invalid">
+            Update
+          </button>
+          <div class="">
+            <p class="" *ngIf="passMsg">
+              {{ passMsg }}
+            </p>
+          </div>
+        </form>
+      </div>
+      <button class="btn-set absolute hidden lg:block md:bottom-[-100px] left-[50%] translate-x-[-50%]"
+      routerLink="/profile">
+        Back To Profile
+      </button>
+    </div>
   </div>
 </section>
