@@ -1,4 +1,4 @@
-<section class="bg-white lg:px-72">
+<section class="bg-white lg:px-72 min-h-[100vh]">
   <div
     class="flex flex-col lg:flex-row items-center justify-center pt-12 h-[70vh]"
     *ngIf="userOrders.length == 0"
@@ -51,15 +51,15 @@
         <div><i class="fa-solid fa-arrow-down fa-xl cursor-pointer"></i></div>
       </div>
       <div
-        class="overflow-hidden transition-all my-4 h- "
-        [class.h-[350px]]="openIndex === i"
+        class="overflow-hidden my-4"
+        [class.h-[100%]]="openIndex === i"
         [class.h-[0px]]="openIndex !== i"
       >
         <div
           class="overflow-hidden text-center flex items-center justify-center flex-wrap"
         >
           <div
-            class="p-3 border-2 text-center transition-all max-w-[200px] "
+            class="p-3 border-2 text-center md:max-w-[200px] max-w-[150px]"
             *ngFor="let item of order.cartItems"
           >
             <h2 class="text-slate-700 text-[16px] font-bold">
