@@ -57,7 +57,10 @@ export class CashComponent {
       next: (response) => {
         console.log(response);
         if (response.status == 'success') {
-          window.open(`http://localhost:4200/#/allorders`, '_blank');
+          window.open(
+            `https://mohamed0ahmed.github.io/store/#/allorders`,
+            '_blank'
+          );
           window.close();
         }
       },
