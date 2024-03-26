@@ -206,9 +206,7 @@ export class SettingComponent implements OnInit {
 
   //* #### Update number
   number: FormGroup = new FormGroup({
-    phone: new FormControl('', [
-      Validators.pattern(/^(1[0-9]|2[0-9]|[3-5][0-9]|60)$/),
-    ]),
+    phone: new FormControl('', [Validators.pattern(/^01[0125][0-9]{8}$/)]),
   });
 
   addnumber(): void {
@@ -264,8 +262,7 @@ export class SettingComponent implements OnInit {
         this.passMsg = response.message;
         this.resetPassword.reset();
         localStorage.setItem('eToken', response.token);
-        localStorage.setItem(`${this.userId} name ` , response.user.name)
-        
+        localStorage.setItem(`${this.userId} name `, response.user.name);
       },
       error: (err) => {
         console.log(err);

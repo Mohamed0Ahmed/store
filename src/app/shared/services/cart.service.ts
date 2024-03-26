@@ -47,7 +47,7 @@ export class CartService {
   //* online payment
   checkOut(id: string, userData: object): Observable<any> {
     const encodedUrl = encodeURIComponent(
-      'http://localhost:4200/#'
+      'https://mohamed0ahmed.github.io/store/#'
     );
     return this._HttpClient.post(
       `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=${encodedUrl}`,
@@ -58,7 +58,6 @@ export class CartService {
   }
   //* cash payment
   cash(id: string, userData: object): Observable<any> {
-    
     return this._HttpClient.post(
       `https://ecommerce.routemisr.com/api/v1/orders/${id}`,
       {
