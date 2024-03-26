@@ -44,13 +44,23 @@ export class CartService {
       `https://ecommerce.routemisr.com/api/v1/cart/`
     );
   }
-  //* check out
+  //* online payment
   checkOut(id: string, userData: object): Observable<any> {
     const encodedUrl = encodeURIComponent(
-      'https://mohamed0ahmed.github.io/Fresh-Cart/#'
+      'http://localhost:4200/#'
     );
     return this._HttpClient.post(
       `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=${encodedUrl}`,
+      {
+        shippingAddress: userData,
+      }
+    );
+  }
+  //* cash payment
+  cash(id: string, userData: object): Observable<any> {
+    
+    return this._HttpClient.post(
+      `https://ecommerce.routemisr.com/api/v1/orders/${id}`,
       {
         shippingAddress: userData,
       }

@@ -162,7 +162,10 @@
       class="flex flex-col md:flex-row justify-between p-5 bg-gray-100 dark:bg-[#212529] rounded-lg relative top-[-20px]"
     >
       <div class="flex flex-col md:flex-row">
-        <button class="btn bg-red-600 hover:bg-red-400 text-white font-bold">
+        <button
+          class="btn bg-red-600 hover:bg-red-400 text-white font-bold"
+          [routerLink]="['/onlinepayment', cartDetails._id]"
+        >
           <span>
             PAYMENT
             <i
@@ -173,6 +176,7 @@
         </button>
         <button
           class="btn bg-red-600 hover:bg-red-400 text-white font-bold md:mx-2 my-2 md:my-0"
+          [routerLink]="['/cash', cartDetails._id]"
         >
           <span>
             CASH

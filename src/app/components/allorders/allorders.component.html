@@ -1,1 +1,77 @@
-<p>allorders works!</p>
+<section class="bg-white lg:px-72">
+  <div
+    class="flex flex-col lg:flex-row items-center justify-center pt-12 h-[70vh]"
+    *ngIf="userOrders.length == 0"
+  >
+    <div class="lg:w-[60%]">
+      <img src="./assets/images/sale.png" alt="svg" class="w-full" />
+    </div>
+    <div class="pt-12 text-center">
+      <h2 class="font-extrabold text-[30px] text-slate-700 dark:text-white">
+        No Payment Yet.
+      </h2>
+      <h2 class="font-extrabold text-[30px] text-slate-700 dark:text-white">
+        Big Sale For First Order.
+      </h2>
+      <button
+        class="bg-red-700 hover:bg-red-500 font-bold text-white btn"
+        routerLink="/home"
+      >
+        Make First Order Now
+      </button>
+    </div>
+  </div>
+  <div *ngIf="userOrders.length != 0" class="">
+    <div class="pt-5">
+      <h2
+        class="font-extrabold text-[30px] text-slate-700 dark:text-white text-center"
+      >
+        Your Orders
+      </h2>
+    </div>
+    <div *ngFor="let order of userOrders; let i = index">
+      <div
+        class="mt-6 p-3 flex flex-col md:flex-row items-center justify-between shadow-lg rounded-2xl cursor-pointer"
+        (click)="toggleHeight(i)"
+      >
+        <div>
+          <h2 class="text-slate-700 text-[24px] font-bold">
+            {{ i + 1 }} . Order
+          </h2>
+        </div>
+        <h2 class="text-slate-700 text-[24px] font-bold">
+          Payment : <span>{{ order.paymentMethodType }}</span>
+        </h2>
+        <h2 class="text-slate-700 text-[24px] font-bold">
+          Price : <span>{{ order.totalOrderPrice | currency : " EGP " }}</span>
+        </h2>
+        <h2 class="text-slate-700 text-[24px] font-bold">
+          Number of Items : <span>{{ order.cartItems.length }}</span>
+        </h2>
+        <div><i class="fa-solid fa-arrow-down fa-xl cursor-pointer"></i></div>
+      </div>
+      <div
+        class="overflow-hidden transition-all my-4 h- "
+        [class.h-[350px]]="openIndex === i"
+        [class.h-[0px]]="openIndex !== i"
+      >
+        <div
+          class="overflow-hidden text-center flex items-center justify-center flex-wrap"
+        >
+          <div
+            class="p-3 border-2 text-center transition-all max-w-[200px] "
+            *ngFor="let item of order.cartItems"
+          >
+            <h2 class="text-slate-700 text-[16px] font-bold">
+              {{ item.product.title.split(" ").slice(0, 2).join(" ") }}
+            </h2>
+            <h2 class="text-slate-700 text-[16px] font-bold">
+              {{ item.price | currency : " EGP" }}
+            </h2>
+            <img [src]="item.product.imageCover" alt="image" class="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

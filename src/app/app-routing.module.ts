@@ -67,12 +67,20 @@ const routes: Routes = [
         title: 'Setting',
       },
       {
-        path: 'checkout',
+        path: 'onlinepayment/:id',
         loadComponent: () =>
           import('./components/checkout/checkout.component').then(
             (m) => m.CheckoutComponent
           ),
-        title: 'Payment',
+        title: 'Online Pay',
+      },
+      {
+        path: 'cash/:id',
+        loadComponent: () =>
+          import('./components/cash/cash.component').then(
+            (m) => m.CashComponent
+          ),
+        title: 'Cash Pay',
       },
       {
         path: 'details/:id',

@@ -6,21 +6,22 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
-  selector: 'app-checkout',
+  selector: 'app-cash',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss'],
+  templateUrl: './cash.component.html',
+  styleUrls: ['./cash.component.scss'],
 })
-export class CheckoutComponent {
+export class CashComponent {
   constructor(
     private _FormBuilder: FormBuilder,
     private _ActivatedRoute: ActivatedRoute,
-    private _CartService: CartService
+    private _CartService: CartService,
+    private _Router: Router
   ) {}
   //* varialbes
 
@@ -52,11 +53,12 @@ export class CheckoutComponent {
     console.log(this.checkOut.value);
     this.userData = this.checkOut.value;
 
-    this._CartService.checkOut(this.cartId, this.userData).subscribe({
+    this._CartService.cash(this.cartId, this.userData).subscribe({
       next: (response) => {
         console.log(response);
         if (response.status == 'success') {
-          window.open(response.session.url, '_self');
+          window.open(`http://localhost:4200/#/allorders`, '_blank');
+          window.close();
         }
       },
     });
