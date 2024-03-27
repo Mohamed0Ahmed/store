@@ -79,8 +79,11 @@
 
     <!-- * sign in -->
     <div class="text-center flex relative">
-      <button class="mx-3" (click)="togglemenu()">
-        <img [src]="photo" alt="user" class="w-[40px] rounded-full" />
+      <button
+        class="mx-3 w-[40px] h-[40px] rounded-full flex items-center justify-center overflow-hidden"
+        (click)="togglemenu()"
+      >
+        <img [src]="photo" alt="user" class="w-full" />
       </button>
       <div
         class="absolute top-[50px] left-[-50px] w-[150px] bg-slate-200 dark:bg-slate-950 rounded-lg text-white p-3 flex flex-col"

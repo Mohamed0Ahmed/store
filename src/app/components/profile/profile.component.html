@@ -2,7 +2,11 @@
   class="flex flex-col md:flex-row md:items-center justify-center min-h-[95vh] bg-gray-300 dark:bg-[#15191d]"
 >
   <div class="lg-w[60%] p-5 relative flex justify-center">
-    <img [src]="photo" alt="user" class="lg:w-[400px] w-[300px] rounded-full" />
+    <div
+      class="rounded-full w-96 h-96 overflow-hidden flex items-center justify-center"
+    >
+      <img [src]="photo" alt="user" class="w-full" />
+    </div>
     <span
       class="absolute right-[60px] bottom-[60px] rounded-full py-2 px-2 bg-[#232b28] dark:bg-slate-500"
       (click)="onUploadClicked()"
@@ -19,7 +23,9 @@
       ><i class="fa-solid fa-ban text-[25px] text-slate-200 cursor-pointer"> </i
     ></span>
   </div>
-  <div class="lg:w-[20%] p-5 shadow-xl shadow-slate-600 bg-slate-100 rounded-xl dark:bg-slate-800 dark:shadow-none">
+  <div
+    class="lg:w-[20%] p-5 shadow-xl shadow-slate-600 bg-slate-100 rounded-xl dark:bg-slate-800 dark:shadow-none"
+  >
     <h2 class="text-[40px] font-bold py-6 text-slate-700 dark:text-white">
       MY PROFILE
       <i
@@ -34,7 +40,7 @@
           <h2 class="font-bold text-[20px] text-gray-500">
             Name :
             <span
-              class="border-b  text-slate-700 font-bold dark:text-gray-200"
+              class="border-b text-slate-700 font-bold dark:text-gray-200"
               >{{ userName }}</span
             >
           </h2>
@@ -43,7 +49,7 @@
           <h2 class="font-bold text-[20px] text-gray-500">
             E-Mail :
             <span
-              class="border-b  text-slate-700 font-bold dark:text-gray-200"
+              class="border-b text-slate-700 font-bold dark:text-gray-200"
               >{{ userEmail }}</span
             >
           </h2>
@@ -53,10 +59,9 @@
       <div class="pt-4 flex items-center">
         <h2 class="font-bold text-[20px] text-gray-500">Phone :</h2>
         <div *ngIf="usernumber" class="mx-3">
-          <span
-            class="border-b  text-slate-700 font-bold dark:text-gray-200"
-            >{{ usernumber }}</span
-          >
+          <span class="border-b text-slate-700 font-bold dark:text-gray-200">{{
+            usernumber
+          }}</span>
           <span> </span>
         </div>
         <div *ngIf="!usernumber" class="mx-3">
@@ -70,10 +75,9 @@
       <div class="pt-5 flex items-center">
         <h2 class="font-bold text-[20px] text-gray-500 me-6">Age :</h2>
         <div *ngIf="userAge" class="mx-3">
-          <span
-            class="border-b  text-slate-700 font-bold dark:text-gray-200"
-            >{{ userAge }}</span
-          >
+          <span class="border-b text-slate-700 font-bold dark:text-gray-200">{{
+            userAge
+          }}</span>
           <span> </span>
         </div>
         <div *ngIf="!userAge" class="mx-3">
@@ -87,10 +91,9 @@
       <div class="pt-4 flex items-center">
         <h2 class="font-bold text-[20px] text-gray-500">Address :</h2>
         <div *ngIf="userAdress" class="mx-3">
-          <span
-            class="border-b  text-slate-700 font-bold dark:text-gray-200"
-            >{{ userAdress }}</span
-          >
+          <span class="border-b text-slate-700 font-bold dark:text-gray-200">{{
+            userAdress
+          }}</span>
           <span> </span>
         </div>
         <div *ngIf="!userAdress" class="mx-3">
