@@ -1,7 +1,7 @@
 <section class=" ">
-  <div class="bg-white lg:px-[100px] ">
+  <div class="bg-white lg:px-[100px]">
     <div
-      class="flex flex-col  md:flex-row shadow-2xl min-h-[95vh] md:items-center md:justify-center"
+      class="flex flex-col md:flex-row shadow-2xl min-h-[95vh] md:items-center md:justify-center"
     >
       <div class="md:w-[50%]">
         <div class="flex items-center justify-center">
@@ -12,14 +12,14 @@
             <ng-container *ngFor="let item of productDetails.images">
               <ng-template carouselSlide>
                 <div
-                  class="p-3 relative border-2 mx-2 transition max-w-[350px] ms-5 md:ms-0"
+                  class="lg:p-12 relative border-2 mx-2 transition max-w-[350px] lg:h-[200px] flex items-center justify-center overflow-hidden ms-5 md:ms-0"
                   [class.border-red-500]="item == pathImg"
                 >
                   <div class="p-0">
                     <img
                       [src]="item"
                       alt="image"
-                      class=""
+                      class="w-full"
                       (click)="sayHello(item)"
                     />
                   </div>
