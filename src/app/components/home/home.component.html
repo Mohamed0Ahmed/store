@@ -10,7 +10,7 @@
       class="absolute inset-0 flex items-center justify-center dark:bg-[#15191d] dark:bg-opacity-75"
     ></div>
     <div
-      class="flex md:absolute static lg:left-[300px] lg:top-[100px] mt-5 md:left-[100px] md:top-[100px] w-96 rounded bg-white border"
+      class="flex md:absolute static lg:left-[15%] lg:top-[100px] mt-5 md:left-[100px] md:top-[100px] w-96 rounded bg-white border"
     >
       <i
         class="fa-solid fa-magnifying-glass fa-xl ic relative top-[25px] left-[10px]"
@@ -34,7 +34,9 @@
   <!-- //* elcrtonic -->
   <div class="py-4 dark:text-white">
     <span>
-      <h2 class="font-extrabold text-[30px] py-5">Electronic Products</h2>
+      <h2 class="font-extrabold text-[30px] py-5 ms-[20px]">
+        Electronic Products
+      </h2>
     </span>
     <owl-carousel-o [options]="electro">
       <ng-container *ngFor="let item of productData | search : serchTerm">
@@ -89,6 +91,10 @@
                     class="fa-solid fa-star repeat_here text-red-600 dark:text-[#FF4C29]"
                   ></i>
                 </ng-container>
+                <i
+                  *ngIf="item.ratingsAverage < 5"
+                  class="fa-solid fa-star repeat_here text-black dark:text-[#ffffff]"
+                ></i>
               </span>
             </div>
             <span class="price" *ngIf="item.price > 3000"> -20% </span>
@@ -216,7 +222,7 @@
 <!-- *############ top  -->
 <div class="py-4 dark:text-white container mx-auto">
   <span>
-    <h2 class="font-extrabold text-[30px] py-5">TOP SELLING</h2>
+    <h2 class="font-extrabold text-[30px] py-5 ms-[20px]">TOP SELLING</h2>
   </span>
   <owl-carousel-o [options]="electro">
     <ng-container *ngFor="let item of productData2 | search : serchTerm">
@@ -253,7 +259,7 @@
               {{ (item.price * 20) / 100 + item.price }}
             </p>
             <p
-              class="text-gray-600 line-through dark:text-white"
+            class="text-gray-600 line-through dark:text-white"
               *ngIf="item.price < 3000 && item.price > 1500"
             >
               {{ (item.price * 16) / 100 + item.price }}
@@ -275,6 +281,14 @@
                 ></i>
               </ng-container>
             </span>
+            <i
+            *ngIf="item.ratingsAverage < 5"
+            class="fa-solid fa-star repeat_here text-black dark:text-[#ffffff]"
+          ></i>
+            <i
+            *ngIf="item.ratingsAverage < 4"
+            class="fa-solid fa-star repeat_here text-black dark:text-[#ffffff]"
+          ></i>
           </div>
           <span class="price" *ngIf="item.price > 3000"> -20% </span>
           <span class="price" *ngIf="item.price < 3000 && item.price > 1500">

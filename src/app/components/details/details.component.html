@@ -1,18 +1,18 @@
 <section class=" ">
-  <div class="bg-white lg:px-[100px]">
+  <div class="bg-white lg:px-[100px] md:py-[30px]">
     <div
       class="flex flex-col md:flex-row shadow-2xl min-h-[95vh] md:items-center md:justify-center"
     >
       <div class="md:w-[50%]">
         <div class="flex items-center justify-center">
-          <img [src]="pathImg" alt="item" class="md:w-[450px] w-[200px]" />
+          <img [src]="pathImg" alt="item" class="md:w-[50%] w-[200px]" />
         </div>
         <div class="p-5">
           <owl-carousel-o [options]="electro">
             <ng-container *ngFor="let item of productDetails.images">
               <ng-template carouselSlide>
                 <div
-                  class="lg:p-12 relative border-2 mx-2 transition max-w-[350px] lg:h-[200px] flex items-center justify-center overflow-hidden ms-5 md:ms-0"
+                  class="lg:p-12 relative border-2 mx-2 transition max-w-[90%] lg:h-[200px] flex items-center justify-center overflow-hidden ms-5 md:ms-0"
                   [class.border-red-500]="item == pathImg"
                 >
                   <div class="p-0">
@@ -39,7 +39,7 @@
             {{ productDetails.description }}
           </h2>
         </div>
-        <div class="flex justify-between w-full pt-5">
+        <div class="flex justify-between w-full pb-4">
           <div class="font-bold">RATING :</div>
           <div>
             <ng-container
@@ -51,6 +51,14 @@
                 class="fa-solid fa-star repeat_here text-[#ff3b3b] dark:text-[#FF4C29]"
               ></i>
             </ng-container>
+            <i
+              *ngIf="productDetails.ratingsAverage < 5"
+              class="fa-solid fa-star repeat_here text-black "
+            ></i>
+            <i
+              *ngIf="productDetails.ratingsAverage < 4"
+              class="fa-solid fa-star repeat_here text-black "
+            ></i>
           </div>
         </div>
         <div class="flex justify-between w-full pt-5">
