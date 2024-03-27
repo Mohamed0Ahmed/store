@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit {
     if (storedDarkMode) {
       this.darkMode = JSON.parse(storedDarkMode);
     }
+
+    initFlowbite();
   }
 
   toggle() {
