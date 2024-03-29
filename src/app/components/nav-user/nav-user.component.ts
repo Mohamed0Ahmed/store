@@ -5,11 +5,12 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { WishlistService } from 'src/app/shared/services/wishlist.service';
 import { jwtDecode } from 'jwt-decode';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-nav-user',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ProfileComponent],
   templateUrl: './nav-user.component.html',
   styleUrls: ['./nav-user.component.scss'],
 })
@@ -27,7 +28,7 @@ export class NavUserComponent implements OnInit {
   wishlistNum: number = 0;
   Dataaa: any;
   windowWidth: number = 0;
-  photo: string = './assets/images/user.jpg';
+  photo: string = '';
   scrolled: boolean = false;
 
   //*open menu
@@ -85,21 +86,13 @@ export class NavUserComponent implements OnInit {
     this.userOpen = false;
     //* get user profile
     if (localStorage.getItem(this.Dataaa.id)) {
-      this.photo = localStorage.getItem(this.Dataaa.id)!;
+      // this.photo = localStorage.getItem(this.Dataaa.id)!;
+      this._CartService.chgStr(localStorage.getItem(this.Dataaa.id)!);
+      this._CartService.strCurr.subscribe((data) => (this.photo = data));
     } else {
-      this.photo = './assets/images/user.jpg';
+      this._CartService.strCurr.subscribe((data) => (this.photo = data));
     }
 
     //*####
-  }
-
-  //* ### scrolled
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    if (localStorage.getItem(this.Dataaa.id)) {
-      this.photo = localStorage.getItem(this.Dataaa.id)!;
-    } else {
-      this.photo = './assets/images/user.jpg';
-    }
   }
 }

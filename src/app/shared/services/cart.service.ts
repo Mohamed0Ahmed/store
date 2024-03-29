@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -7,8 +8,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CartService {
   constructor(private _HttpClient: HttpClient) {}
+
   //* cartnav number
   cartNubmer: BehaviorSubject<number> = new BehaviorSubject(0);
+
+  //*#### profile photo
+
+  private strSrc = new BehaviorSubject('./assets/images/user.jpg');
+  readonly strCurr = this.strSrc.asObservable();
+  chgStr(strNew: string) {
+    this.strSrc.next(strNew);
+  }
 
   //* add from home and details to cart
   addToCart(id: String): Observable<any> {

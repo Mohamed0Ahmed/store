@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { RouterLink } from '@angular/router';
+import { NavUserComponent } from '../nav-user/nav-user.component';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,10 @@ export class ProfileComponent implements OnInit {
   @ViewChild('fileInput')
   fileInput!: ElementRef;
 
-  constructor(private _AuthService: AuthService) {}
+  constructor(
+    private _AuthService: AuthService,
+    private _CartService: CartService
+  ) {}
   //* variables
 
   photo: string = './assets/images/user.jpg';
@@ -86,7 +91,8 @@ export class ProfileComponent implements OnInit {
         const reader = new FileReader();
 
         reader.onload = (event: any) => {
-          this.photo = event.target.result;
+          this._CartService.chgStr(event.target.result);
+          this._CartService.strCurr.subscribe((data) => (this.photo = data));
           localStorage.setItem(this.Dataaa.id, this.photo);
         };
 
@@ -101,6 +107,7 @@ export class ProfileComponent implements OnInit {
   //* #### Remove photo
   remove(): void {
     localStorage.removeItem(this.Dataaa.id);
-    this.photo = './assets/images/user.jpg';
+    this._CartService.chgStr('./assets/images/user.jpg');
+    this._CartService.strCurr.subscribe((data) => (this.photo = data));
   }
 }
